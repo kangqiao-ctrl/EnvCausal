@@ -1,7 +1,7 @@
 ## Features and Units
 ### Snapshot Dataset
   Population (Thousand People)<br />
-  City area(km2)<br />  
+  City area(km2)<br />
   Population density (People per km2)<br />
   GDP (Billion USD)<br />
   Primary sector (Billion USD)<br />
