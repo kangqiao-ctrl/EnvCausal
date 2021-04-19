@@ -6,7 +6,7 @@ with open('README.md',encoding='utf-8') as f:
 setup(
     name='EnvCausal',
     packages=find_packages(),
-    version='0.3.3',
+    version='0.3.4',
     description = "A Causal Inference Framework for Environmental Data Analysis",
     long_description = long_description,
     long_description_content_type='text/markdown', 

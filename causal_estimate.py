@@ -1,7 +1,7 @@
 import dowhy
 import econml
 
-def causal_estimate(treatment,data,outcome)
+def causal_estimate(treatment,data,outcome,causal_graph)
     f = open(treatment+outcome+".txt", "w+")
     f.close()
 
@@ -15,18 +15,7 @@ def causal_estimate(treatment,data,outcome)
 
     dataset = data
 
-    causal_graph = """digraph {U[label="Unobserved Confounders"];
-    WSPD->NO2;WSPD->PM10;WSPD->CO;WSPD->O3;WSPD->SO2;WSPD->"PM2.5";
-    PRES->NO2;PRES->PM10;PRES->CO;PRES->O3;PRES->SO2;PRES->"PM2.5";
-    HUM->NO2;HUM->PM10;HUM->CO;HUM->O3;HUM->SO2;HUM->"PM2.5";HUM-> PRES;
-    TEMP -> PRES; TEMP -> HUM; 
-    elapsed->Case;elapsed->TEMP;
-    elapsed->ACTV;
-    U->O3;U->TEMP; U-> PRES; U->HUM; U-> WSPD;U-> ACTV;
-    TEMP-> Case; PRES-> Case; HUM-> Case;TEMP-> Case;
-    ACTV->CO;ACTV-> NO2; ACTV-> PM10; ACTV->"PM2.5"; ACTV->SO2; ACTV->Case;
-    NO2-> Case; NO2->O3; SO2-> Case; O3->Case; "PM2.5"->Case; PM10->Case;CO->Case; 
-    }"""
+    causal_graph = causal_graph
 
     model = dowhy.CausalModel(data = dataset,
                         treatment = treatment,
