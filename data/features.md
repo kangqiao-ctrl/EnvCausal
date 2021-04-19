@@ -1,7 +1,7 @@
-Feature and Unit
-Snapshot Dataset
+## Features and Units
+### Snapshot Dataset
   Population (Thousand People)
-  City area(km2)
+  City area(km2)  
   Population density (People per km2)
   GDP (Billion USD)
   Primary sector (Billion USD)
@@ -18,7 +18,7 @@ Snapshot Dataset
   Travellers from Wuhan (Thousand People)
   Wuhan travellers per thousand population
   Average degree of activeness
-Timeseries Dataset
+### Timeseries Dataset
   PM2.5 (μg/m3)
   PM10(μg/m3)
   SO2 (μg/m3)
@@ -32,3 +32,4 @@ Timeseries Dataset
   Degree of activeness
   New confirmed cases
   Morbidity rate
+
