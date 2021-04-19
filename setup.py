@@ -1,13 +1,19 @@
 from setuptools import setup, find_packages
 
+with open('README.md',encoding='utf-8') as f:
+    long_description = f.read()
+
 setup(
     name='EnvCausal',
     packages=find_packages(),
-    version='0.3.0',
+    version='0.3.3',
     description = "A Causal Inference Framework for Environmental Data Analysis",
-    author = "kangqiao-ctrl",
+    long_description = long_description,
+    long_description_content_type='text/markdown', 
+    author = 'kangqiao-ctrl',
     author_email = "qiaok@mun.ca",
     url = "https://github.com/kangqiao-ctrl/EnvCausal",
+    license='MIT',
     install_requires=[          
         'pandas',
         'numpy',
