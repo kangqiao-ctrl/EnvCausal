@@ -6,7 +6,7 @@ This repository contains all the necessary data and custom Python scripts to rep
 Jupyter Notebook examples will be uploaded in future releases.
 
 ## Script descriptions:
-  _clustering.py_ -- A PCA then k-means clustering pipeline.</br>
+  _clustering.py_ -- A PCA-then-k-means clustering pipeline.</br>
   _causal_estimate.py_ -- A dowhy package wrapper, results will be written in a txt file<sup>1</sup>. </br>
   _recover_network.py_ -- A SAM model for Bayesian network recovery, adjacent matrix will be returned.  </br>
   _result_plot.py_ -- A couple of functions for result visualization.</br>
