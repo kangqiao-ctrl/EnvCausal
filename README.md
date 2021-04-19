@@ -17,10 +17,10 @@ Jupyter Notebook examples will be uploaded in future releases.
 <sup>1</sup>Inspired by [Dowhy example: Iterating over multiple refutation tests](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_refuter_notebook.ipynb)</br>
 
 ## Acknowledgements
-  This software is based in part on the following packages:
-  [DoWhy](https://github.com/microsoft/dowhy)
-  [EconML](https://github.com/microsoft/EconML)
-  [CausalML](https://github.com/uber/causalml)
-  [CausalDiscoveryToolbox](https://github.com/FenTechSolutions/CausalDiscoveryToolbox)
+  This software is based in part on the following packages:</br>
+  [DoWhy](https://github.com/microsoft/dowhy)</br>
+  [EconML](https://github.com/microsoft/EconML)</br>
+  [CausalML](https://github.com/uber/causalml)</br>
+  [CausalDiscoveryToolbox](https://github.com/FenTechSolutions/CausalDiscoveryToolbox)</br>
   
   Thanks for the developers' effort on those fascinating causal inference tools!
