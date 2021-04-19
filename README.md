@@ -1,7 +1,7 @@
 # EnvCausal
 A Causal Inference Framework for Environmental Data Analysis
 
-This repository contains all the data and custom Python scripts to reproduce the results in the paper "Machine Learning–Aided Causal Inference Framework for Environmental Data Analysis: A COVID-19 Case Study".
+This repository contains all the necessary data and custom Python scripts to reproduce the results in the paper "Machine Learning–Aided Causal Inference Framework for Environmental Data Analysis: A COVID-19 Case Study".
 
 Jupyter Notebook examples will be uploaded in future releases.
 
