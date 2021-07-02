@@ -1,0 +1,115 @@
+####### Model #############################################################################################
+Dataset Identifier: (0.0, 1.0)
+Common Causes: ['ACTV', 'PRES', 'NO2', 'elapsed', 'TEMP', 'U', 'WSPD', 'HUM']
+Effect Modifiers: ['PM2.5', 'PM10', 'CO', 'SO2']
+Instruments: []
+Outcome: ['Case']
+Treatment: ['O3']
+#############################################################################################################
+####### Identified Estimand #####################################################################################
+Estimand type: nonparametric-ate
+
+### Estimand : 1
+Estimand name: backdoor1 (Default)
+Estimand expression:
+  d                                                                           
+─────(Expectation(Case|PM2.5,ACTV,PRES,SO2,NO2,PM10,elapsed,TEMP,CO,WSPD,HUM))
+d[O₃]                                                                         
+Estimand assumption 1, Unconfoundedness: If U→{O3} and U→Case then P(Case|O3,PM2.5,ACTV,PRES,SO2,NO2,PM10,elapsed,TEMP,CO,WSPD,HUM,U) = P(Case|O3,PM2.5,ACTV,PRES,SO2,NO2,PM10,elapsed,TEMP,CO,WSPD,HUM)
+
+### Estimand : 2
+Estimand name: iv
+No such variable found!
+
+### Estimand : 3
+Estimand name: frontdoor
+No such variable found!
+
+###################################################################################################################
+####### Linear Estimate ################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.linear_regression_estimator.LinearRegressionEstimator'>
+*** Treatment Name ***
+0.0 1.0
+['O3']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~O3+PM2.5+ACTV+PRES+SO2+NO2+PM10+elapsed+TEMP+CO+WSPD+HUM+O3*PM2.5+O3*PM10+O3*CO+O3*SO2
+Target units: ate
+
+## Estimate
+Mean value: 0.04414368249154911
+### Conditional Estimates
+__categorical__PM2.5  __categorical__PM10  __categorical__CO  __categorical__SO2
+(-0.001, 0.118]       (-0.001, 0.12]       (-0.001, 0.137]    (-0.001, 0.0469]      0.095147
+                                                              (0.0469, 0.0712]      0.092871
+                                                              (0.0712, 0.111]       0.071985
+                                                              (0.111, 0.204]        0.091755
+                                                              (0.204, 1.0]         -0.011155
+                                                                                      ...   
+(0.34, 1.0]           (0.362, 1.0]         (0.319, 1.0]       (-0.001, 0.0469]     -0.030336
+                                                              (0.0469, 0.0712]     -0.010182
+                                                              (0.0712, 0.111]      -0.018614
+                                                              (0.111, 0.204]       -0.017619
+                                                              (0.204, 1.0]         -0.062049
+Length: 204, dtype: float64
+########################################################################################################
+####### Forest Estimate#################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.econml.Econml'>
+*** Treatment Name ***
+0.0 1.0
+['O3']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~O3+PM2.5+ACTV+PRES+SO2+NO2+PM10+elapsed+TEMP+CO+WSPD+HUM | PM2.5,PM10,CO,SO2
+Target units: ate
+
+## Estimate
+Mean value: 0.041250864293271426
+Effect estimates: [-0.00653042 -0.00727336 -0.01178053 ...  0.13834685  0.13873883
+  0.13052721]
+
+########################################################################################################
+####### Linear PTR Refutation #######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:0.04414368249154911
+New effect:2.42861286636753e-17
+p value:0.0
+
+########################################################################################################
+####### Forest PTR Refutation#######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:0.041250864293271426
+New effect:0.0
+p value:1.0
+
+########################################################################################################
+####### Linear RCC Refutation #######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:0.04414368249154911
+New effect:0.04427500920183428
+
+########################################################################################################
+####### Forest RCC Refutation#######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:0.041250864293271426
+New effect:0.05098552147317034
+
+########################################################################################################

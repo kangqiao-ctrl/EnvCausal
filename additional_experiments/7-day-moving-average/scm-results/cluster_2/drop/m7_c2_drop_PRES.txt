@@ -1,0 +1,132 @@
+####### Model #############################################################################################
+Dataset Identifier: (0.0, 1.0)
+Common Causes: ['TEMP', 'U', 'HUM', 'elapsed']
+Effect Modifiers: ['WSPD', 'ACTV']
+Instruments: []
+Outcome: ['Case']
+Treatment: ['PRES']
+#############################################################################################################
+####### Identified Estimand #####################################################################################
+Estimand type: nonparametric-ate
+
+### Estimand : 1
+Estimand name: backdoor1 (Default)
+Estimand expression:
+   d                                                 
+───────(Expectation(Case|HUM,elapsed,TEMP,WSPD,ACTV))
+d[PRES]                                              
+Estimand assumption 1, Unconfoundedness: If U→{PRES} and U→Case then P(Case|PRES,HUM,elapsed,TEMP,WSPD,ACTV,U) = P(Case|PRES,HUM,elapsed,TEMP,WSPD,ACTV)
+
+### Estimand : 2
+Estimand name: iv
+No such variable found!
+
+### Estimand : 3
+Estimand name: frontdoor
+Estimand expression:
+Expectation(Derivative(Case, [PM2.5])*Derivative([PM2.5], [PRES]))
+Estimand assumption 1, Full-mediation: PM2.5 intercepts (blocks) all directed paths from PRES to C,a,s,e.
+Estimand assumption 2, First-stage-unconfoundedness: If U→{PRES} and U→{PM2.5} then P(PM2.5|PRES,U) = P(PM2.5|PRES)
+Estimand assumption 3, Second-stage-unconfoundedness: If U→{PM2.5} and U→{C,a,s,e} then P(C,a,s,e|PM2.5, PRES, U) = P(C,a,s,e|PM2.5, PRES)
+
+###################################################################################################################
+####### Linear Estimate ################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.linear_regression_estimator.LinearRegressionEstimator'>
+*** Treatment Name ***
+0.0 1.0
+['PRES']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~PRES+HUM+elapsed+TEMP+WSPD+ACTV+PRES*WSPD+PRES*ACTV
+Target units: ate
+
+## Estimate
+Mean value: 0.1205435417141553
+### Conditional Estimates
+__categorical__WSPD  __categorical__ACTV
+(-0.001, 0.148]      (-0.001, 0.261]        0.298457
+                     (0.261, 0.342]         0.249789
+                     (0.342, 0.449]         0.212476
+                     (0.449, 0.614]         0.144866
+                     (0.614, 1.0]           0.049676
+(0.148, 0.224]       (-0.001, 0.261]        0.262242
+                     (0.261, 0.342]         0.216744
+                     (0.342, 0.449]         0.176726
+                     (0.449, 0.614]         0.120812
+                     (0.614, 1.0]           0.024705
+(0.224, 0.302]       (-0.001, 0.261]        0.227107
+                     (0.261, 0.342]         0.192476
+                     (0.342, 0.449]         0.150574
+                     (0.449, 0.614]         0.085616
+                     (0.614, 1.0]          -0.010636
+(0.302, 0.437]       (-0.001, 0.261]        0.220498
+                     (0.261, 0.342]         0.145408
+                     (0.342, 0.449]         0.102147
+                     (0.449, 0.614]         0.049930
+                     (0.614, 1.0]          -0.026975
+(0.437, 1.0]         (-0.001, 0.261]        0.152156
+                     (0.261, 0.342]         0.063547
+                     (0.342, 0.449]         0.030817
+                     (0.449, 0.614]        -0.025864
+                     (0.614, 1.0]          -0.116704
+dtype: float64
+########################################################################################################
+####### Forest Estimate#################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.econml.Econml'>
+*** Treatment Name ***
+0.0 1.0
+['PRES']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~PRES+HUM+elapsed+TEMP+WSPD+ACTV | WSPD,ACTV
+Target units: ate
+
+## Estimate
+Mean value: 0.10227377733014457
+Effect estimates: [0.18265646 0.16334903 0.17989862 ... 0.00519398 0.00528747 0.00683212]
+
+########################################################################################################
+####### Linear PTR Refutation #######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:0.1205435417141553
+New effect:-1.1102230246251565e-16
+p value:0.0
+
+########################################################################################################
+####### Forest PTR Refutation#######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:0.10227377733014457
+New effect:0.0
+p value:1.0
+
+########################################################################################################
+####### Linear RCC Refutation #######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:0.1205435417141553
+New effect:0.12066416926473457
+
+########################################################################################################
+####### Forest RCC Refutation#######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:0.10227377733014457
+New effect:0.115457206829119
+
+########################################################################################################

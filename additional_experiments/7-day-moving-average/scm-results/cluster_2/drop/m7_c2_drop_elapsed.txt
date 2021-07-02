@@ -1,0 +1,113 @@
+####### Model #############################################################################################
+Dataset Identifier: (0.0, 1.0)
+Common Causes: ['U']
+Effect Modifiers: ['WSPD']
+Instruments: []
+Outcome: ['Case']
+Treatment: ['elapsed']
+#############################################################################################################
+####### Identified Estimand #####################################################################################
+Estimand type: nonparametric-ate
+
+### Estimand : 1
+Estimand name: backdoor1 (Default)
+Estimand expression:
+    d                             
+──────────(Expectation(Case|WSPD))
+d[elapsed]                        
+Estimand assumption 1, Unconfoundedness: If U→{elapsed} and U→Case then P(Case|elapsed,WSPD,U) = P(Case|elapsed,WSPD)
+
+### Estimand : 2
+Estimand name: iv
+No such variable found!
+
+### Estimand : 3
+Estimand name: frontdoor
+Estimand expression:
+Expectation(Derivative(Case, [CO])*Derivative([CO], [elapsed]))
+Estimand assumption 1, Full-mediation: CO intercepts (blocks) all directed paths from elapsed to C,a,s,e.
+Estimand assumption 2, First-stage-unconfoundedness: If U→{elapsed} and U→{CO} then P(CO|elapsed,U) = P(CO|elapsed)
+Estimand assumption 3, Second-stage-unconfoundedness: If U→{CO} and U→{C,a,s,e} then P(C,a,s,e|CO, elapsed, U) = P(C,a,s,e|CO, elapsed)
+
+###################################################################################################################
+####### Linear Estimate ################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.linear_regression_estimator.LinearRegressionEstimator'>
+*** Treatment Name ***
+0.0 1.0
+['elapsed']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~elapsed+WSPD+elapsed*WSPD
+Target units: ate
+
+## Estimate
+Mean value: -0.1805878449023589
+### Conditional Estimates
+__categorical__WSPD
+(-0.001, 0.148]   -0.298539
+(0.148, 0.224]    -0.243693
+(0.224, 0.302]    -0.200150
+(0.302, 0.437]    -0.136660
+(0.437, 1.0]      -0.011157
+dtype: float64
+########################################################################################################
+####### Forest Estimate#################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.econml.Econml'>
+*** Treatment Name ***
+0.0 1.0
+['elapsed']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~elapsed+WSPD | WSPD
+Target units: ate
+
+## Estimate
+Mean value: -0.1818741633074958
+Effect estimates: [-0.13048821 -0.10842479 -0.12949767 ... -0.10033058 -0.0804486
+ -0.06805304]
+
+########################################################################################################
+####### Linear PTR Refutation #######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:-0.1805878449023589
+New effect:0.0
+p value:1.0
+
+########################################################################################################
+####### Forest PTR Refutation#######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:-0.1818741633074958
+New effect:0.0
+p value:1.0
+
+########################################################################################################
+####### Linear RCC Refutation #######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:-0.1805878449023589
+New effect:-0.1807402837887575
+
+########################################################################################################
+####### Forest RCC Refutation#######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:-0.1818741633074958
+New effect:-0.18719960305508818
+
+########################################################################################################
