@@ -9,7 +9,7 @@ Jupyter Notebook examples will be uploaded in future releases.
 `pip install EnvCausal`
 
 ## Script descriptions
-  _clustering.py_ -- A PCA-then-k-means clustering pipeline.</br>
+  _clustering.py_ -- A PCA-k-means clustering pipeline.</br>
   _causal_estimate.py_ -- A dowhy package wrapper, results will be written in a txt file<sup>1</sup>. </br>
   _recover_network.py_ -- A SAM model for Bayesian network recovery, adjacent matrix will be returned.  </br>
   _result_plot.py_ -- A couple of functions for result visualization.</br>
@@ -17,7 +17,7 @@ Jupyter Notebook examples will be uploaded in future releases.
 <sup>1</sup>Inspired by [Dowhy example: Iterating over multiple refutation tests](https://github.com/microsoft/dowhy/blob/master/docs/source/example_notebooks/dowhy_refuter_notebook.ipynb)</br>
 
 ## Acknowledgements
-  This software is based in part on the following packages:</br>
+  Some functions in the the following packages were utlized in the software:</br>
   [DoWhy](https://github.com/microsoft/dowhy)</br>
   [EconML](https://github.com/microsoft/EconML)</br>
   [CausalML](https://github.com/uber/causalml)</br>
