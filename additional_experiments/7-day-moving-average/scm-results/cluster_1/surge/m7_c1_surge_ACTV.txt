@@ -1,0 +1,135 @@
+####### Model #############################################################################################
+Dataset Identifier: (0.0, 1.0)
+Common Causes: ['U', 'elapsed']
+Effect Modifiers: ['TEMP', 'PRES', 'HUM', 'WSPD']
+Instruments: []
+Outcome: ['Case']
+Treatment: ['ACTV']
+#############################################################################################################
+####### Identified Estimand #####################################################################################
+Estimand type: nonparametric-ate
+
+### Estimand : 1
+Estimand name: backdoor1 (Default)
+Estimand expression:
+   d                                                 
+───────(Expectation(Case|WSPD,PRES,TEMP,HUM,elapsed))
+d[ACTV]                                              
+Estimand assumption 1, Unconfoundedness: If U→{ACTV} and U→Case then P(Case|ACTV,WSPD,PRES,TEMP,HUM,elapsed,U) = P(Case|ACTV,WSPD,PRES,TEMP,HUM,elapsed)
+
+### Estimand : 2
+Estimand name: iv
+No such variable found!
+
+### Estimand : 3
+Estimand name: frontdoor
+Estimand expression:
+Expectation(Derivative(Case, [CO])*Derivative([CO], [ACTV]))
+Estimand assumption 1, Full-mediation: CO intercepts (blocks) all directed paths from ACTV to C,a,s,e.
+Estimand assumption 2, First-stage-unconfoundedness: If U→{ACTV} and U→{CO} then P(CO|ACTV,U) = P(CO|ACTV)
+Estimand assumption 3, Second-stage-unconfoundedness: If U→{CO} and U→{C,a,s,e} then P(C,a,s,e|CO, ACTV, U) = P(C,a,s,e|CO, ACTV)
+
+###################################################################################################################
+####### Linear Estimate ################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.linear_regression_estimator.LinearRegressionEstimator'>
+*** Treatment Name ***
+0.0 1.0
+['ACTV']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~ACTV+WSPD+PRES+TEMP+HUM+elapsed+ACTV*TEMP+ACTV*PRES+ACTV*HUM+ACTV*WSPD
+Target units: ate
+
+## Estimate
+Mean value: 0.3694236201003324
+### Conditional Estimates
+__categorical__TEMP  __categorical__PRES  __categorical__HUM  __categorical__WSPD
+(-0.001, 0.299]      (0.807, 0.916]       (-0.001, 0.387]     (-0.001, 0.104]        0.721345
+                     (0.916, 0.956]       (-0.001, 0.387]     (0.104, 0.215]         0.556539
+                                                              (0.215, 0.457]         0.409977
+                                                              (0.457, 0.633]         0.281765
+                                          (0.387, 0.583]      (-0.001, 0.104]        0.194127
+                                                                                       ...   
+(0.665, 1.0]         (0.807, 0.916]       (0.583, 0.702]      (0.215, 0.457]        -0.506057
+                                                              (0.457, 0.633]        -0.338456
+                                                              (0.633, 1.0]          -0.444911
+                                          (0.702, 0.849]      (0.104, 0.215]        -0.788617
+                                                              (0.215, 0.457]        -0.538365
+Length: 64, dtype: float64
+########################################################################################################
+####### Forest Estimate#################################################################################
+*** Class Name ***
+<class 'dowhy.causal_estimators.econml.Econml'>
+*** Treatment Name ***
+0.0 1.0
+['ACTV']
+*** Causal Estimate ***
+
+## Identified estimand
+Estimand type: nonparametric-ate
+
+## Realized estimand
+b: Case~ACTV+WSPD+PRES+TEMP+HUM+elapsed | TEMP,PRES,HUM,WSPD
+Target units: ate
+
+## Estimate
+Mean value: 0.3173599343916755
+Effect estimates: [ 0.48771578  0.48956835  0.464364    0.44088938  0.44262281  0.44437275
+  0.43560104  0.40798203  0.35428221  0.30129537  0.25928932  0.23282498
+  0.21438907  0.19095703  0.19403732  0.21077681  0.21577965  0.18676916
+  0.18023159  0.19523292  0.2096194   0.20715914  0.21118344  0.19629796
+  0.19512987  0.13258894  0.09901316  0.00687373 -0.02606322 -0.05968463
+  0.35905184  0.39076448  0.40996402  0.39303471  0.38996885  0.35523487
+  0.30705025  0.25965919  0.19244845  0.15190117  0.1246139   0.10371038
+  0.10853311  0.17807924  0.2442925   0.364665    0.49745566  0.56286537
+  0.58153217  0.56658971  0.54798093  0.56701923  0.61100721  0.61483876
+  0.61350728  0.62150486  0.64623907  0.68448384  0.67782745  0.67193246
+  0.28526945  0.32240454  0.36834167  0.35329756  0.37005935  0.3203484
+  0.29295882  0.2644676   0.21166193  0.12637305  0.09718261  0.0760835
+  0.07225517  0.11947509  0.14967935  0.43756446  0.39222052  0.35938298
+  0.32625806  0.32879785  0.25563591  0.27128841  0.21315567  0.18026081
+  0.12344004  0.13840918  0.09817577  0.14772025  0.14992427  0.16615998
+  0.36136875  0.34864057  0.34623768  0.36853558  0.39689357  0.39599325
+  0.40311745  0.39251261  0.40337861  0.41573815  0.42089501  0.416242
+  0.43098851  0.43035056  0.45479326]
+
+########################################################################################################
+####### Linear PTR Refutation #######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:0.3694236201003324
+New effect:-2.4424906541753444e-15
+p value:0.0
+
+########################################################################################################
+####### Forest PTR Refutation#######################################################################################
+*** Class Name ***
+Refute: Use a Placebo Treatment
+Refute: Use a Placebo Treatment
+Estimated effect:0.3173599343916755
+New effect:0.0
+p value:1.0
+
+########################################################################################################
+####### Linear RCC Refutation #######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:0.3694236201003324
+New effect:0.36601535886035486
+
+########################################################################################################
+####### Forest RCC Refutation#######################################################################################
+*** Class Name ***
+Refute: Add a Random Common Cause
+Refute: Add a Random Common Cause
+Estimated effect:0.3173599343916755
+New effect:0.29323761055311254
+
+########################################################################################################
